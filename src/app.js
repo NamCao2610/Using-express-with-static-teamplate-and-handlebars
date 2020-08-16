@@ -21,7 +21,6 @@ app.use(express.static(publicPath));
 app.get("", (req, res) => {
   res.render("index", {
     title: "Trang chu",
-    indexText: "Day la trang chinh",
     name: "Nam Cao",
   });
 });
@@ -29,7 +28,6 @@ app.get("", (req, res) => {
 app.get("/about", (req, res) => {
   res.render("about", {
     title: "About",
-    aboutText: "Day la trang about",
     image: "/assets/images.jpg",
     name: "Nam Cao",
   });
@@ -38,8 +36,24 @@ app.get("/about", (req, res) => {
 app.get("/help", (req, res) => {
   res.render("help", {
     title: "Help",
-    helpText: "Day la trang help",
+    helpText: "Chung toi se giup ban suong",
     name: "Nam Cao",
+  });
+});
+
+app.get("/help/*", (req, res) => {
+  res.render("404", {
+    title: "404",
+    error: "Help article not found",
+    name: "Nam Cao",
+  });
+});
+
+app.get("*", (req, res) => {
+  res.render("404", {
+    title: "404",
+    error: "404 not found",
+    name: "Nam cao",
   });
 });
 
