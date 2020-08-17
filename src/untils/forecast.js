@@ -1,26 +1,24 @@
 const request = require("request");
 
 const forecast = (latitude, longitude, callback) => {
-  const url = `https://api.darksky.net/forecast/76733e9c3ca293ed6de639d3d5bf874f/${latitude},${longitude}`;
+  const url = `http://api.weatherstack.com/current?access_key=1cfdba09cc1d6dffe03bd686a480bb89&query=${latitude},${longitude}`;
 
   request({ url, json: true }, (error, response) => {
     if (error) {
-      callback("Unable to connect to forecast", undefined);
+      callback("Unable to connect to weather service", undefined);
     } else if (response.body.error) {
-      callback("Unable to find location", undefined);
+      callback(response.body.error.info, undefined);
     } else {
       callback(
         undefined,
-        response.body.daily.data[0].summary +
-          " .It is currently " +
-          response.body.currently.temperature +
-          " degress out. This high today is " +
-          response.body.daily.data[0].temperatureHigh +
-          " with a low of " +
-          response.body.daily.data[0].temperatureLow +
-          " There is a " +
-          response.body.currently.precipProbability +
-          " % chance of rain"
+        response.body.current.weather_descriptions[0] +
+          " It is currently " +
+          response.body.current.temperature +
+          " degress out .It feels like " +
+          response.body.current.feelslike +
+          " degress out . The humidity " +
+          response.body.current.humidity +
+          "%."
       );
     }
   });

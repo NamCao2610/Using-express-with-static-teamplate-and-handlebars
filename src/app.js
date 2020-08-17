@@ -24,6 +24,7 @@ app.use(express.static(publicPath));
 app.get("", (req, res) => {
   res.render("index", {
     title: "Weather",
+    text: "Use this site to get your weather",
     name: "Nam Cao",
   });
 });
@@ -31,6 +32,8 @@ app.get("", (req, res) => {
 app.get("/about", (req, res) => {
   res.render("about", {
     title: "About",
+    text:
+      "This site was created by Nam Cao. It use data from mapbox.com and darksky.net!",
     image: "/assets/images.jpg",
     name: "Nam Cao",
   });
@@ -39,7 +42,7 @@ app.get("/about", (req, res) => {
 app.get("/help", (req, res) => {
   res.render("help", {
     title: "Help",
-    helpText: "Chung toi se giup ban suong",
+    text: "Help me Help me",
     name: "Nam Cao",
   });
 });
@@ -88,7 +91,7 @@ app.get("/products", (req, res) => {
 app.get("/help/*", (req, res) => {
   res.render("404", {
     title: "404",
-    error: "Help article not found",
+    text: "Help article not found",
     name: "Nam Cao",
   });
 });
@@ -96,7 +99,7 @@ app.get("/help/*", (req, res) => {
 app.get("*", (req, res) => {
   res.render("404", {
     title: "404",
-    error: "404 not found",
+    text: "404 not found",
     name: "Nam cao",
   });
 });
